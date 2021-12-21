@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-    //baseURL: '',
+    baseURL: 'scenaries/',
 });
 
 export const scenaries = {
     getList() {
-        return instance.get(`scenaries/scenaries.json`).then(response => {
+        return instance.get(`scenaries.json`).then(response => {
             return response.data;
         });
     },

@@ -1,5 +1,4 @@
-{
-    "default": {
-        "src": "/scenaries/default"
-    }
-}
+[
+    "default",
+    "default"
+]

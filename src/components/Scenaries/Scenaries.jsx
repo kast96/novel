@@ -1,17 +1,5 @@
-import { scenaries } from '../../api/api';
-
-const Scenaries = () => {
-    scenaries.getList().then((response) => {
-        let scenariesList = response;
-
-        for (const key in scenariesList) {
-            scenaries.getConfig(scenariesList[key].src).then((response) => {
-                let config = response;
-                config.src = scenariesList[key].src;
-                console.log(config);
-            });
-        }
-    });
+const Scenaries = ({scenaries}) => {
+    console.log(scenaries);
 
     return (
         <div>Scenaries</div>
