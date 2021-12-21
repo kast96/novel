@@ -1,0 +1,16 @@
+{
+    "player": {
+        "name": "Игрок",
+        "color": "#3F3"
+    },
+    "backgrounds": {
+        "bg": "assets/backgrounds/bg.png"
+    },
+    "persons": {
+        "name": "Игрок",
+        "color": "#FD8DFF",
+        "sprites": {
+            "normal": "assets/persons/lena/normal.png"
+        }
+    }
+}
