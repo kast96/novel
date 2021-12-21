@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 const Scenario = ({id, name}) => {
     return (
         <div>
-            <a href={id}>{name}</a>
+            <Link to={`/game/${id}/`}>{name}</Link>
         </div>
     );
 }

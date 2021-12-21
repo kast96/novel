@@ -1,6 +1,8 @@
 const Game = () => {
     return (
-        <div>Game</div>
+        <div>
+            Game
+        </div>
     );
 }
 
