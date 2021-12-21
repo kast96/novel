@@ -1,8 +1,10 @@
-const Scenaries = ({scenaries}) => {
-    console.log(scenaries);
+import Scenario from "./Scenario";
 
+const Scenaries = ({scenaries}) => {
     return (
-        <div>Scenaries</div>
+        <div>
+            {scenaries.map(scenario => <Scenario key={scenario.id} id={scenario.id} name={scenario.name} />)}
+        </div>
     );
 }
 

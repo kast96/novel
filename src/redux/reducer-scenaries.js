@@ -5,7 +5,7 @@ const TOGGLE_IS_LOADING = 'novel/scenaries/TOGGLE-IS-LOADING';
 
 const initialState = {
     isLoading: true,
-    scenaries: {}
+    scenaries: []
 };
 
 const scenariesReducer = (state = initialState, action) => {
@@ -28,10 +28,17 @@ export const getScenaries = () => {
 	return async (dispatch) => {
 		dispatch(toggleIsLoading(true));
 		let scenariesList = await scenariesAPI.getList();
+        if (!(scenariesList instanceof Array)) {
+            dispatch(toggleIsLoading(false));
+            return;
+        }
         let scenariesConfings = [];
         for (const key in scenariesList) {
             let config = await scenariesAPI.getConfig(scenariesList[key]);
-            config.src = scenariesList[key];
+            if (typeof(config) !== 'object') {
+                continue;
+            }
+            config.id = scenariesList[key];
             scenariesConfings.push(config);
         }
 		dispatch(setScenaries(scenariesConfings));
