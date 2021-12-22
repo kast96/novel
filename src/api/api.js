@@ -2,7 +2,7 @@ import axios from "axios";
 import { showError } from "../utils/errors";
 
 const instance = axios.create({
-    baseURL: 'scenaries/',
+    baseURL: '/scenaries/',
 });
 
 export const scenaries = {
@@ -14,11 +14,27 @@ export const scenaries = {
         });
     },
 
-    getConfig(path) {
-        return instance.get(`${path}/config.json`).then(response => {
+    getConfig(id) {
+        return instance.get(`${id}/config.json`).then(response => {
             return response.data;
         }).catch(reason => {
-            showError(`Ошибка загрузки конигурационного файла сценария ${path}\n${reason}`);
+            showError(`Ошибка загрузки конигурационного файла сценария ${id}\n${reason}`);
         });
     },
+
+    getResources(id) {
+        return instance.get(`${id}/resources.json`).then(response => {
+            return response.data;
+        }).catch(reason => {
+            showError(`Ошибка загрузки файла ресурсов сценария ${id}\n${reason}`);
+        });
+    },
+
+    getStory(id) {
+        return instance.get(`${id}/story.json`).then(response => {
+            return response.data;
+        }).catch(reason => {
+            showError(`Ошибка загрузки файла сценария ${id}\n${reason}`);
+        });
+    }
 }

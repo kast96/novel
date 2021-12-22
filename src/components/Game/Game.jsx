@@ -1,4 +1,6 @@
-const Game = () => {
+const Game = (props) => {
+    console.log(props);
+
     return (
         <div>
             Game
