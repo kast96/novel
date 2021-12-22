@@ -5,6 +5,7 @@ const SET_RESOURCES = 'novel/scenaries/SET-RESOURCES';
 const SET_STORY = 'novel/scenaries/SET-STORY';
 const TOGGLE_IS_LOADING = 'novel/scenaries/TOGGLE-IS-LOADING';
 const SET_ERROR = 'novel/scenaries/SET-ERROR';
+const SET_STEP = 'novel/scenaries/SET-STEP';
 
 const initialState = {
     isLoading: true,
@@ -12,6 +13,34 @@ const initialState = {
     resources: {},
     story: {},
     error: false,
+    current: {
+        step: 0,
+        bg: false,
+        persons: {
+            left: {
+                person: false,
+                spriteName: false,
+            },
+            centerLeft: {
+                person: false,
+                spriteName: false,
+            },
+            center: {
+                person: false,
+                spriteName: false,
+            },
+            centerRight: {
+                person: false,
+                spriteName: false,
+            },
+            right: {
+                person: false,
+                spriteName: false,
+            },
+        },
+        speaker: false,
+        text: false
+    }
 };
 
 const storyReducer = (state = initialState, action) => {
@@ -39,6 +68,36 @@ const storyReducer = (state = initialState, action) => {
 
         case SET_ERROR:
             return {...state, error: action.error}
+
+        case SET_STEP:
+            let current = {
+                ...state.current,
+                persons: {
+                    left: {...state.current.persons.left},
+                    centerLeft: {...state.current.persons.centerLeft},
+                    center: {...state.current.persons.center},
+                    centerRight: {...state.current.persons.centerRight},
+                    right: {...state.current.persons.right}
+                }
+            };
+            current.step = action.step;
+            if (current.step >= state.story.length) {
+                current.step = 0;
+            }
+            let storyItem = state.story[current.step];
+            if (storyItem.bg) current.bg = storyItem.bg;
+            if (storyItem.personLeft) current.persons.left = storyItem.personLeft;
+            if (storyItem.personCenterLeft) current.persons.centerLeft = storyItem.personCenterLeft;
+            if (storyItem.personCenter) current.persons.center = storyItem.personCenter;
+            if (storyItem.personCenterRight) current.persons.centerRight = storyItem.personCenterRight;
+            if (storyItem.personRight) current.persons.right = storyItem.personRight;
+            if (storyItem.speaker) current.speaker = storyItem.speaker;
+            if (storyItem.text) current.text = storyItem.text;
+
+            return {
+                ...state,
+                current
+            }
 
         default:
             return state;
@@ -97,6 +156,10 @@ export const toggleIsLoading = (isLoading) => {
 
 export const setError = (error) => {
 	return {type: SET_ERROR, error}
+}
+
+export const setStep = (step) => {
+    return {type: SET_STEP, step}
 }
 
 export default storyReducer;
