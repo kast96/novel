@@ -15,7 +15,7 @@ const initialState = {
     error: false,
     current: {
         step: 0,
-        bg: false,
+        background: false,
         persons: {
             left: {
                 person: false,
@@ -85,12 +85,12 @@ const storyReducer = (state = initialState, action) => {
                 current.step = 0;
             }
             let storyItem = state.story[current.step];
-            if (storyItem.bg) current.bg = storyItem.bg;
-            if (storyItem.personLeft) current.persons.left = storyItem.personLeft;
-            if (storyItem.personCenterLeft) current.persons.centerLeft = storyItem.personCenterLeft;
-            if (storyItem.personCenter) current.persons.center = storyItem.personCenter;
-            if (storyItem.personCenterRight) current.persons.centerRight = storyItem.personCenterRight;
-            if (storyItem.personRight) current.persons.right = storyItem.personRight;
+            if (storyItem.background) current.background = storyItem.background;
+            if (storyItem.personLeft) current.persons.left.person = storyItem.personLeft;
+            if (storyItem.personCenterLeft) current.persons.centerLeft.person = storyItem.personCenterLeft;
+            if (storyItem.personCenter) current.persons.center.person = storyItem.personCenter;
+            if (storyItem.personCenterRight) current.persons.centerRight.person = storyItem.personCenterRight;
+            if (storyItem.personRight) current.persons.right.person = storyItem.personRight;
             if (storyItem.speaker) current.speaker = storyItem.speaker;
             if (storyItem.text) current.text = storyItem.text;
 

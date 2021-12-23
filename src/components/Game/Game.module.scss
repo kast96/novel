@@ -1,0 +1,52 @@
+$person-width: 820px;
+$person-height: 840px;
+$persons-space: 510px;
+
+.game {
+    width: 1920px;
+    height: 1080px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.person {
+    position: absolute;
+    width: $person-width;
+    height: $person-height;
+    left: 50%;
+    bottom: 0;
+    z-index: 2;
+    border: 1px solid #f00;
+
+    &__left {
+        margin-left: -$person-height/2 - $persons-space*2;
+    }
+
+    &__centerLeft {
+        margin-left: -$person-height/2 - $persons-space;
+    }
+
+    &__center {
+        margin-left: -$person-height/2;
+    }
+
+    &__centerRight {
+        margin-left: -$person-height/2 + $persons-space;
+    }
+
+    &__right {
+        margin-left: -$person-height/2 + $persons-space*2;
+    }
+}

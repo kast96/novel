@@ -1,6 +1,6 @@
 [
     {
-        "bg": "bg1",
+        "background": "bg1",
         "personCenter": "L",
         "speaker": "L",
         "text": "Lorem ipso"
