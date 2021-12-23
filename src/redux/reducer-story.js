@@ -6,6 +6,7 @@ const SET_STORY = 'novel/scenaries/SET-STORY';
 const TOGGLE_IS_LOADING = 'novel/scenaries/TOGGLE-IS-LOADING';
 const SET_ERROR = 'novel/scenaries/SET-ERROR';
 const SET_STEP = 'novel/scenaries/SET-STEP';
+const UPDATE_CURRENT = 'novel/scenaries/UPDATE-CURRENT';
 
 const initialState = {
     isLoading: true,
@@ -70,6 +71,15 @@ const storyReducer = (state = initialState, action) => {
             return {...state, error: action.error}
 
         case SET_STEP:
+            return {
+                ...state,
+                current: {
+                    ...state.current,
+                    step: (action.step < state.story.length) ? action.step : 0
+                }
+            }
+
+        case UPDATE_CURRENT: {
             let current = {
                 ...state.current,
                 persons: {
@@ -80,24 +90,24 @@ const storyReducer = (state = initialState, action) => {
                     right: {...state.current.persons.right}
                 }
             };
-            current.step = action.step;
-            if (current.step >= state.story.length) {
-                current.step = 0;
-            }
+
             let storyItem = state.story[current.step];
-            if (storyItem.background) current.background = storyItem.background;
-            if (storyItem.personLeft) current.persons.left.person = storyItem.personLeft;
-            if (storyItem.personCenterLeft) current.persons.centerLeft.person = storyItem.personCenterLeft;
-            if (storyItem.personCenter) current.persons.center.person = storyItem.personCenter;
-            if (storyItem.personCenterRight) current.persons.centerRight.person = storyItem.personCenterRight;
-            if (storyItem.personRight) current.persons.right.person = storyItem.personRight;
-            if (storyItem.speaker) current.speaker = storyItem.speaker;
-            if (storyItem.text) current.text = storyItem.text;
+            if (storyItem) {
+                if (storyItem.background) current.background = storyItem?.background;
+                if (storyItem.personLeft) current.persons.left.person = storyItem?.personLeft;
+                if (storyItem.personCenterLeft) current.persons.centerLeft.person = storyItem?.personCenterLeft;
+                if (storyItem.personCenter) current.persons.center.person = storyItem?.personCenter;
+                if (storyItem.personCenterRight) current.persons.centerRight.person = storyItem?.personCenterRight;
+                if (storyItem.personRight) current.persons.right.person = storyItem?.personRight;
+                if (storyItem.speaker) current.speaker = storyItem?.speaker;
+                if (storyItem.text) current.text = storyItem?.text;
+            }
 
             return {
                 ...state,
                 current
             }
+        }
 
         default:
             return state;
@@ -160,6 +170,10 @@ export const setError = (error) => {
 
 export const setStep = (step) => {
     return {type: SET_STEP, step}
+}
+
+export const updateCurrent = () => {
+    return {type: UPDATE_CURRENT}
 }
 
 export default storyReducer;

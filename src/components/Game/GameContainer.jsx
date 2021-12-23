@@ -3,14 +3,23 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { useParams } from "react-router-dom";
 import Game from "./Game";
-import { getStory, setStep } from "../../redux/reducer-story";
+import { getStory, setStep, updateCurrent } from "../../redux/reducer-story";
+import { useState } from 'react';
 
-const GameContainer = ({isLoading, error, config, resources, story, current, getStory, setStep}) => {
+const GameContainer = ({isLoading, error, config, resources, story, current, getStory, setStep, updateCurrent}) => {
     let params = useParams();
+    let [step, setLocalStep] = useState(false);
 
     useEffect(() => {
         getStory(params.id);
     }, [getStory, params.id]);
+
+    useEffect(() => {
+        if (isLoading || step === current.step) return;
+        updateCurrent();
+        setLocalStep(current.step);
+    }, [step, current.step, isLoading, updateCurrent]);
+
 
     return (
         <div>
@@ -33,5 +42,5 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getStory, setStep}),
+    connect(mapStateToProps, {getStory, setStep, updateCurrent}),
 )(GameContainer);

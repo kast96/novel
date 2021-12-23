@@ -1,7 +1,11 @@
 [
     {
         "background": "bg1",
+        "personLeft": "L",
+        "personCenterLeft": "L",
         "personCenter": "L",
+        "personCenterRight": "L",
+        "personRight": "L",
         "speaker": "L",
         "text": "Lorem ipso"
     },
