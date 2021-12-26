@@ -21,13 +21,13 @@ const Game = ({config, resources, current, setStep}) => {
 
     return (
         <div className={s.game} onClick={onClick}>
-            <div className={s.background} style={{background: background}}></div>
+            <div className={s.background} style={{backgroundImage: background}}></div>
             <div className={s.persons}>
-                <div className={classNames(s.person, s.person__left)}>{personLeft && <img src={personLeft} />}</div>
-                <div className={classNames(s.person, s.person__centerLeft)}>{personCenterLeft && <img src={personCenterLeft} />}</div>
-                <div className={classNames(s.person, s.person__center)}>{personCenter && <img src={personCenter} />}</div>
-                <div className={classNames(s.person, s.person__centerRight)}>{personCenterRight && <img src={personCenterRight} />}</div>
-                <div className={classNames(s.person, s.person__right)}>{personRight && <img src={personRight} />}</div>
+                <div className={classNames(s.person, s.person__left)}>{personLeft && <img src={personLeft} alt="" />}</div>
+                <div className={classNames(s.person, s.person__centerLeft)}>{personCenterLeft && <img src={personCenterLeft} alt="" />}</div>
+                <div className={classNames(s.person, s.person__center)}>{personCenter && <img src={personCenter} alt="" />}</div>
+                <div className={classNames(s.person, s.person__centerRight)}>{personCenterRight && <img src={personCenterRight} alt="" />}</div>
+                <div className={classNames(s.person, s.person__right)}>{personRight && <img src={personRight} alt="" />}</div>
             </div>
         </div>
     );

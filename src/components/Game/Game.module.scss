@@ -1,13 +1,16 @@
-$person-width: 820px;
-$person-height: 840px;
-$persons-space: 510px;
+$game-width: 1600px;
+$game-height: 900px;
+$person-width: round($game-width * 0.4);
+$person-height: round($game-height * 0.7);
+$persons-space: round($game-width * 0.15);
 
 .game {
-    width: 1920px;
-    height: 1080px;
+    width: $game-width;
+    height: $game-height;
     margin: 0 auto;
     position: relative;
     border: 1px solid #0f0;
+    overflow: hidden;
 }
 
 .background {
@@ -23,6 +26,9 @@ $persons-space: 510px;
 }
 
 .person {
+    display: flex;
+    justify-content: center;
+    align-items: end;
     position: absolute;
     width: $person-width;
     height: $person-height;
@@ -49,5 +55,10 @@ $persons-space: 510px;
 
     &__right {
         margin-left: -$person-height/2 + $persons-space*2;
+    }
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
     }
 }
