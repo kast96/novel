@@ -1,12 +1,12 @@
 import {scenaries as scenariesAPI} from '../api/api';
 
-const SET_CONFIG = 'novel/scenaries/SET-CONFIG';
-const SET_RESOURCES = 'novel/scenaries/SET-RESOURCES';
-const SET_STORY = 'novel/scenaries/SET-STORY';
-const TOGGLE_IS_LOADING = 'novel/scenaries/TOGGLE-IS-LOADING';
-const SET_ERROR = 'novel/scenaries/SET-ERROR';
-const SET_STEP = 'novel/scenaries/SET-STEP';
-const UPDATE_CURRENT = 'novel/scenaries/UPDATE-CURRENT';
+const SET_CONFIG = 'novel/story/SET-CONFIG';
+const SET_RESOURCES = 'novel/story/SET-RESOURCES';
+const SET_STORY = 'novel/story/SET-STORY';
+const TOGGLE_IS_LOADING = 'novel/story/TOGGLE-IS-LOADING';
+const SET_ERROR = 'novel/story/SET-ERROR';
+const SET_STEP = 'novel/story/SET-STEP';
+const UPDATE_CURRENT = 'novel/story/UPDATE-CURRENT';
 
 const initialState = {
     isLoading: true,
