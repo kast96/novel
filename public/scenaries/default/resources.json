@@ -8,7 +8,7 @@
     },
     "persons": {
         "L": {
-            "name": "L",
+            "name": "Len",
             "color": "#FD8DFF",
             "sprites": {
                 "normal": "assets/persons/lena/normal.png"

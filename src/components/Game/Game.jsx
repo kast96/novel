@@ -18,6 +18,7 @@ const Game = ({config, resources, current, setStep}) => {
     let personCenterRight = (current.persons.centerRight.person && resources.persons && resources.persons[current.persons.centerRight.person]?.sprites[personSpriteCenterRight]) ? path+resources.persons[current.persons.centerRight.person].sprites[personSpriteCenterRight] : false;
     let personSpriteRight = current.persons.right.spriteName || 'normal';
     let personRight = (current.persons.right.person && resources.persons && resources.persons[current.persons.right.person]?.sprites[personSpriteRight]) ? path+resources.persons[current.persons.right.person].sprites[personSpriteRight] : false;
+    let speaker = (current.speaker && resources.persons && resources.persons[current.speaker]);
 
     return (
         <div className={s.game} onClick={onClick}>
@@ -28,6 +29,10 @@ const Game = ({config, resources, current, setStep}) => {
                 <div className={classNames(s.person, s.person__center)}>{personCenter && <img src={personCenter} alt="" />}</div>
                 <div className={classNames(s.person, s.person__centerRight)}>{personCenterRight && <img src={personCenterRight} alt="" />}</div>
                 <div className={classNames(s.person, s.person__right)}>{personRight && <img src={personRight} alt="" />}</div>
+            </div>
+            <div className={s.message}>
+                <div className={s.message__author} style={{color: speaker?.color}}>{speaker?.name || ' '}</div>
+                <div className={s.message__text}>{current.text}</div>
             </div>
         </div>
     );

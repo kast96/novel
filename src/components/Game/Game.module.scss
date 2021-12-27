@@ -3,6 +3,8 @@ $game-height: 900px;
 $person-width: round($game-width * 0.4);
 $person-height: round($game-height * 0.7);
 $persons-space: round($game-width * 0.15);
+$message-width: round($game-width * 0.5);
+$message-height: round($game-height * 0.14);
 
 .game {
     width: $game-width;
@@ -28,7 +30,7 @@ $persons-space: round($game-width * 0.15);
 .person {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     position: absolute;
     width: $person-width;
     height: $person-height;
@@ -60,5 +62,31 @@ $persons-space: round($game-width * 0.15);
     img {
         max-width: 100%;
         max-height: 100%;
+    }
+}
+
+.message {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: $message-width;
+    height: $message-height;
+    background-color: rgba(0,0,0,.5);
+    backdrop-filter: blur(40px);
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: #fff;
+
+    &__author {
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    &__text {
+
     }
 }
