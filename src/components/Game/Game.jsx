@@ -14,7 +14,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}
     let personCenterRight = (current.persons.centerRight.person && resources.persons && resources.persons[current.persons.centerRight.person]?.sprites[personSpriteCenterRight]) ? path+resources.persons[current.persons.centerRight.person].sprites[personSpriteCenterRight] : false;
     let personSpriteRight = current.persons.right.spriteName || 'normal';
     let personRight = (current.persons.right.person && resources.persons && resources.persons[current.persons.right.person]?.sprites[personSpriteRight]) ? path+resources.persons[current.persons.right.person].sprites[personSpriteRight] : false;
-    let speaker = (current.speaker && resources.persons && resources.persons[current.speaker]);
+    let speaker = (current.speaker && resources.persons && ((current.speaker === 'player' && resources.player) || resources.persons[current.speaker]));
 
     return (
         <div className={s.game} onClick={onClickGame}>

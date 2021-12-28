@@ -15,6 +15,10 @@
         "text": "qweqwe"
     },
     {
+        "speaker": "player",
+        "text": "say player"
+    },
+    {
         "jumpSelect": [
             {
                 "jumpTo": "start",
