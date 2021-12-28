@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import s from './Game.module.scss';
 
-const Game = ({config, resources, current, setStep, lazyText}) => {
+const Game = ({config, resources, current, setStep, lazyText, jumpLabels}) => {
     const onClick = () => {
         setStep(current.step + 1);
     }

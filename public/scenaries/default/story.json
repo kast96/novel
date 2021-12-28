@@ -1,5 +1,6 @@
 [
     {
+        "jumpLabel": "start",
         "background": "bg1",
         "personLeft": "L",
         "personCenterLeft": "L",
@@ -10,6 +11,15 @@
         "text": "Lorem ipso"
     },
     {
+        "jumpLabel": "two",
         "text": "qweqwe"
+    },
+    {
+        "jumpTo": "start",
+        "jumpSelect": {
+            "start": "Jump to start",
+            "two": "Jump to two"
+        },
+        "text": "1111"
     }
 ]

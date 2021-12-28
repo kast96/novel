@@ -6,11 +6,18 @@ import Game from "./Game";
 import { getStory, setStep, updateCurrent } from "../../redux/reducer-story";
 import { useState } from 'react';
 
-const GameContainer = ({isLoading, error, config, resources, story, current, getStory, setStep, updateCurrent}) => {
+const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, current, getStory, setStep, updateCurrent}) => {
     let params = useParams();
     let [step, setLocalStep] = useState(false);
     let [textPostion, setLocalTextPositin] = useState(0);
     let lazyText = (current.text) ? current.text.substring(0, textPostion) : '';
+
+    useEffect(() => {
+        if (typeof(current.jumpTo) != 'undefined' && typeof(jumpLabels[current.jumpTo]) != 'undefined') {
+            setStep(jumpLabels[current.jumpTo]);
+            console.log(`jump to: [${jumpLabels[current.jumpTo]}] ${current.jumpTo}`);
+        }
+    }, [setStep, current.jumpTo, jumpLabels]);
 
     useEffect(() => {
         getStory(params.id);
@@ -35,7 +42,7 @@ const GameContainer = ({isLoading, error, config, resources, story, current, get
         <div>
             {isLoading && <div>Loading...</div>}
             {!isLoading && error && <div>Error: {error}</div>}
-            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} setStep={setStep} lazyText={lazyText} />}
+            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} setStep={setStep} lazyText={lazyText} jumpLabels={jumpLabels} />}
         </div>
     );
 }
@@ -47,6 +54,7 @@ const mapStateToProps = (state) => {
         config: state.story.config,
         resources: state.story.resources,
         story: state.story.story,
+        jumpLabels: state.story.jumpLabels,
         current: state.story.current
     }
 }

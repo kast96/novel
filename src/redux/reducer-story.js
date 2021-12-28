@@ -13,6 +13,7 @@ const initialState = {
     config: {},
     resources: {},
     story: {},
+    jumpLabels: {},
     error: false,
     current: {
         step: 0,
@@ -40,7 +41,8 @@ const initialState = {
             },
         },
         speaker: false,
-        text: false
+        text: false,
+        jumpTo: false
     }
 };
 
@@ -59,9 +61,17 @@ const storyReducer = (state = initialState, action) => {
             };
 
         case SET_STORY:
+            let jumpLabels = {};
+            for (const key in action.story) {
+                const storyItem = action.story[key];
+                if (storyItem.jumpLabel) {
+                    jumpLabels[storyItem.jumpLabel] = parseInt(key);
+                }
+            }
             return {
                 ...state,
-                story: action.story
+                story: action.story,
+                jumpLabels,
             };
         
         case TOGGLE_IS_LOADING:
@@ -101,6 +111,7 @@ const storyReducer = (state = initialState, action) => {
                 if (storyItem.personRight) current.persons.right.person = storyItem?.personRight;
                 if (storyItem.speaker) current.speaker = storyItem?.speaker;
                 if (storyItem.text) current.text = storyItem?.text;
+                current.jumpTo = storyItem.jumpTo ? storyItem.jumpTo : false;
             }
 
             return {
