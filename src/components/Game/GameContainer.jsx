@@ -12,10 +12,22 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
     let [textPostion, setLocalTextPositin] = useState(0);
     let lazyText = (current.text) ? current.text.substring(0, textPostion) : '';
 
+    const onClickGame = () => {
+        if (current.jumpSelect) return;
+        setStep(current.step + 1);
+    }
+
+    const onClickOption = (value) => {
+        if (value && typeof(jumpLabels[value]) != 'undefined') {
+            setStep(jumpLabels[value]);
+            console.log(`jumpSelect: [${jumpLabels[value]}] ${value}`);
+        }
+    }
+
     useEffect(() => {
-        if (typeof(current.jumpTo) != 'undefined' && typeof(jumpLabels[current.jumpTo]) != 'undefined') {
+        if (current.jumpTo && typeof(jumpLabels[current.jumpTo]) != 'undefined') {
             setStep(jumpLabels[current.jumpTo]);
-            console.log(`jump to: [${jumpLabels[current.jumpTo]}] ${current.jumpTo}`);
+            console.log(`jumpTo: [${jumpLabels[current.jumpTo]}] ${current.jumpTo}`);
         }
     }, [setStep, current.jumpTo, jumpLabels]);
 
@@ -42,7 +54,7 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
         <div>
             {isLoading && <div>Loading...</div>}
             {!isLoading && error && <div>Error: {error}</div>}
-            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} setStep={setStep} lazyText={lazyText} jumpLabels={jumpLabels} />}
+            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} lazyText={lazyText} onClickGame={onClickGame} onClickOption={onClickOption} />}
         </div>
     );
 }

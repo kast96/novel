@@ -1,11 +1,7 @@
 import classNames from 'classnames';
 import s from './Game.module.scss';
 
-const Game = ({config, resources, current, setStep, lazyText, jumpLabels}) => {
-    const onClick = () => {
-        setStep(current.step + 1);
-    }
-
+const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}) => {
     let path = '/scenaries/'+config.id+'/';
     let background = (resources.backgrounds && resources.backgrounds[current.background]) ? 'url("'+path+resources.backgrounds[current.background]+'")' : '';
     let personSpriteLeft = current.persons.left.spriteName || 'normal';
@@ -21,7 +17,7 @@ const Game = ({config, resources, current, setStep, lazyText, jumpLabels}) => {
     let speaker = (current.speaker && resources.persons && resources.persons[current.speaker]);
 
     return (
-        <div className={s.game} onClick={onClick}>
+        <div className={s.game} onClick={onClickGame}>
             <div className={s.background} style={{backgroundImage: background}}></div>
             <div className={s.persons}>
                 <div className={classNames(s.person, s.person__left)}>{personLeft && <img src={personLeft} alt="" />}</div>
@@ -34,6 +30,11 @@ const Game = ({config, resources, current, setStep, lazyText, jumpLabels}) => {
                 <div className={s.message__author} style={{color: speaker?.color}}>{speaker?.name || ' '}</div>
                 <div className={s.message__text}>{lazyText}</div>
             </div>
+            {current.jumpSelect &&
+                <div className={s.select}>
+                    {current.jumpSelect.map((option) => <div key={option.jumpTo} className={s.select__option} onClick={onClickOption.bind(this, option.jumpTo)}>{option.text}</div>)}
+                </div>
+            }
         </div>
     );
 }

@@ -15,11 +15,19 @@
         "text": "qweqwe"
     },
     {
-        "jumpTo": "start",
-        "jumpSelect": {
-            "start": "Jump to start",
-            "two": "Jump to two"
-        },
+        "jumpSelect": [
+            {
+                "jumpTo": "start",
+                "text": "Jump to start"
+            },
+            {
+                "jumpTo": "two",
+                "text": "Jump to two"
+            }
+        ],
         "text": "1111"
+    },
+    {
+        "jumpTo": "start"
     }
 ]
