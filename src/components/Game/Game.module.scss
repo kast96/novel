@@ -11,7 +11,6 @@ $message-height: round($game-height * 0.14);
     height: $game-height;
     margin: 0 auto;
     position: relative;
-    border: 1px solid #0f0;
     overflow: hidden;
 }
 
@@ -37,7 +36,6 @@ $message-height: round($game-height * 0.14);
     left: 50%;
     bottom: 0;
     z-index: 2;
-    border: 1px solid #f00;
 
     &__left {
         margin-left: -$person-height/2 - $persons-space*2;
