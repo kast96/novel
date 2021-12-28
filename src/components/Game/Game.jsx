@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import s from './Game.module.scss';
 
-const Game = ({config, resources, current, setStep}) => {
+const Game = ({config, resources, current, setStep, lazyText}) => {
     const onClick = () => {
         setStep(current.step + 1);
     }
@@ -32,7 +32,7 @@ const Game = ({config, resources, current, setStep}) => {
             </div>
             <div className={s.message}>
                 <div className={s.message__author} style={{color: speaker?.color}}>{speaker?.name || ' '}</div>
-                <div className={s.message__text}>{current.text}</div>
+                <div className={s.message__text}>{lazyText}</div>
             </div>
         </div>
     );

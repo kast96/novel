@@ -9,6 +9,8 @@ import { useState } from 'react';
 const GameContainer = ({isLoading, error, config, resources, story, current, getStory, setStep, updateCurrent}) => {
     let params = useParams();
     let [step, setLocalStep] = useState(false);
+    let [textPostion, setLocalTextPositin] = useState(0);
+    let lazyText = (current.text) ? current.text.substring(0, textPostion) : '';
 
     useEffect(() => {
         getStory(params.id);
@@ -18,14 +20,22 @@ const GameContainer = ({isLoading, error, config, resources, story, current, get
         if (isLoading || step === current.step) return;
         updateCurrent();
         setLocalStep(current.step);
+        setLocalTextPositin(0);
     }, [step, current.step, isLoading, updateCurrent]);
 
+    useEffect(() => {
+        if (isLoading || !current.text  || textPostion === current.text.length) return;
+        setTimeout(() => {
+            if (isLoading || !current.text || textPostion === current.text.length) return;
+            setLocalTextPositin(textPostion + 1);
+        }, 50);
+    }, [textPostion, current.text, isLoading]);
 
     return (
         <div>
             {isLoading && <div>Loading...</div>}
             {!isLoading && error && <div>Error: {error}</div>}
-            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} setStep={setStep} />}
+            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} setStep={setStep} lazyText={lazyText} />}
         </div>
     );
 }
