@@ -14,7 +14,12 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
 
     const onClickGame = () => {
         if (current.jumpSelect) return;
-        setStep(current.step + 1);
+        if (textPostion < current.text.length) {
+            //skip lazy text. -1 for setTimeout make last step
+            textPostion = current.text.length - 1;
+        } else {
+            setStep(current.step + 1);
+        }
     }
 
     const onClickOption = (value) => {
@@ -43,13 +48,15 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
     }, [step, current.step, isLoading, updateCurrent]);
 
     useEffect(() => {
-        if (isLoading || !current.text  || textPostion === current.text.length) return;
+        if (isLoading || !current.text || textPostion >= current.text.length) return;
         setTimeout(() => {
-            if (isLoading || !current.text || textPostion === current.text.length) return;
-            setLocalTextPositin(textPostion + 1);
+            let nextValue = textPostion + 1;
+            if (isLoading || !current.text || textPostion >= current.text.length) return;
+            if (textPostion > current.text.length) nextValue = current.text.length;
+            setLocalTextPositin(nextValue);
         }, 50);
     }, [textPostion, current.text, isLoading]);
-
+    
     return (
         <div>
             {isLoading && <div>Loading...</div>}
