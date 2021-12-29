@@ -14,6 +14,10 @@ Background key in resources.json
 
 Person key in resources.json with position
 
+### `personSpriteLeft`, `personSpriteCenterLeft`, `personSpriteCenter`, `personSpriteCenterRight`, `personSpriteRight` (string)
+
+Person sprite name in resources.json with position
+
 ### `speaker` (string)
 
 Speaker of text. Person key in resources.json or "player" value

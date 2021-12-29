@@ -105,11 +105,18 @@ const storyReducer = (state = initialState, action) => {
             let storyItem = state.story[current.step];
             if (storyItem) {
                 if (storyItem.background) current.background = storyItem?.background;
-                if (storyItem.personLeft) current.persons.left.person = storyItem?.personLeft;
-                if (storyItem.personCenterLeft) current.persons.centerLeft.person = storyItem?.personCenterLeft;
-                if (storyItem.personCenter) current.persons.center.person = storyItem?.personCenter;
-                if (storyItem.personCenterRight) current.persons.centerRight.person = storyItem?.personCenterRight;
-                if (storyItem.personRight) current.persons.right.person = storyItem?.personRight;
+                if (storyItem.personLeft) current.persons.left.person = storyItem.personLeft;
+                if (storyItem.personCenterLeft) current.persons.centerLeft.person = storyItem.personCenterLeft;
+                if (storyItem.personCenter) current.persons.center.person = storyItem.personCenter;
+                if (storyItem.personCenterRight) current.persons.centerRight.person = storyItem.personCenterRight;
+                if (storyItem.personRight) current.persons.right.person = storyItem.personRight;
+
+                if (storyItem.personLeftSprite) current.persons.left.spriteName = storyItem.personLeftSprite;
+                if (storyItem.personCenterLeftSprite) current.persons.centerLeft.spriteName = storyItem.personCenterLeftSprite;
+                if (storyItem.personCenterSprite) current.persons.center.spriteName = storyItem.personCenterSprite;
+                if (storyItem.personCenterRightSprite) current.persons.centerRight.spriteName = storyItem.personCenterRightSprite;
+                if (storyItem.personRightSprite) current.persons.right.spriteName = storyItem.personRightSprite;
+
                 if (storyItem.speaker) current.speaker = storyItem?.speaker;
                 if (storyItem.text) current.text = storyItem?.text;
                 current.jumpTo = storyItem.jumpTo ? storyItem.jumpTo : false;

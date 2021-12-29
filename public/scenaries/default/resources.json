@@ -11,7 +11,8 @@
             "name": "Len",
             "color": "#FD8DFF",
             "sprites": {
-                "normal": "assets/persons/lena/normal.png"
+                "normal": "assets/persons/lena/normal.png",
+                "blue": "assets/persons/lena/blue.png"
             }
         }
     }
