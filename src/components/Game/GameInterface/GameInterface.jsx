@@ -1,6 +1,6 @@
 import s from './GameInterface.module.scss';
-import {ReactComponent as DownloadSvg} from '../../../svg/download-solid.svg';
-import {ReactComponent as UploadSvg} from '../../../svg/upload-solid.svg';
+import {ReactComponent as DownloadSvg} from '../../../resources/svg/download-solid.svg';
+import {ReactComponent as UploadSvg} from '../../../resources/svg/upload-solid.svg';
 
 const GameInterface = () => {
     return (

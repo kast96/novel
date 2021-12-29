@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import s from './Game.module.scss';
+import GameInterface from './GameInterface/GameInterface';
 
 const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}) => {
     let path = '/scenaries/'+config.id+'/';
@@ -17,8 +18,9 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}
     let speaker = (current.speaker && resources.persons && ((current.speaker === 'player' && resources.player) || resources.persons[current.speaker]));
 
     return (
-        <div className={s.game} onClick={onClickGame}>
+        <div className={s.game}>
             <div className={s.background} style={{backgroundImage: background}}></div>
+            <div className={s.clickarea} onClick={onClickGame}></div>
             <div className={s.persons}>
                 <div className={classNames(s.person, s.person__left)}>{personLeft && <img src={personLeft} alt="" />}</div>
                 <div className={classNames(s.person, s.person__centerLeft)}>{personCenterLeft && <img src={personCenterLeft} alt="" />}</div>
@@ -35,6 +37,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}
                     {current.jumpSelect.map((option) => <div key={option.jumpTo} className={s.select__option} onClick={onClickOption.bind(this, option.jumpTo)}>{option.text}</div>)}
                 </div>
             }
+            <GameInterface />
         </div>
     );
 }

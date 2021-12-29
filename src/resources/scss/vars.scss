@@ -1,0 +1,25 @@
+$game-width: 1600px;
+$game-height: 900px;
+$person-width: round($game-width * 0.4);
+$person-height: round($game-height * 0.7);
+$persons-space: round($game-width * 0.15);
+$message-width: round($game-width * 0.5);
+$message-height: round($game-height * 0.14);
+$select-width: round($game-width * 0.5);
+$select-max-height: round($game-height - $message-height - $game-height * 0.05);
+
+$background-color-interface: rgba(0,0,0,.5);
+$background-color-interface-hover: rgba(0,0,0,.8);
+$backdrop-filter-interface: blur(40px);
+$border-radius-interface: 10px;
+$padding-interface: 20px;
+$font-weight-interface: 600;
+$font-size-interface: 20px;
+$line-height-interface: 27px;
+$color-interface: #fff;
+$text-shadow-interface: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+$z-index-background: 10;
+$z-index-objects: 20;
+$z-index-click-area: 30;
+$z-index-interface: 40;

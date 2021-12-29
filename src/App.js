@@ -3,7 +3,7 @@ import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import GameContainer from './components/Game/GameContainer';
-import './fonts/Nunito/Nunito.scss';
+import './resources/fonts/Nunito/Nunito.scss';
 import s from './App.module.scss';
 
 function App() {

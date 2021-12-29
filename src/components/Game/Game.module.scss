@@ -1,12 +1,4 @@
-$game-width: 1600px;
-$game-height: 900px;
-$person-width: round($game-width * 0.4);
-$person-height: round($game-height * 0.7);
-$persons-space: round($game-width * 0.15);
-$message-width: round($game-width * 0.5);
-$message-height: round($game-height * 0.14);
-$select-width: round($game-width * 0.5);
-$select-max-height: round($game-height - $message-height - $game-height * 0.05);
+@import '../../resources/scss/vars.scss';
 
 .game {
     width: $game-width;
@@ -16,13 +8,22 @@ $select-max-height: round($game-height - $message-height - $game-height * 0.05);
     overflow: hidden;
 }
 
+.clickarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-index-click-area;
+}
+
 .background {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: $z-index-background;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -37,7 +38,7 @@ $select-max-height: round($game-height - $message-height - $game-height * 0.05);
     height: $person-height;
     left: 50%;
     bottom: 0;
-    z-index: 2;
+    z-index: $z-index-objects;
 
     &__left {
         margin-left: -$person-height/2 - $persons-space*2;
@@ -70,18 +71,13 @@ $select-max-height: round($game-height - $message-height - $game-height * 0.05);
     left: 50%;
     bottom: 20px;
     transform: translateX(-50%);
-    z-index: 3;
+    z-index: $z-index-objects;
     width: $message-width;
     height: $message-height;
-    background-color: rgba(0,0,0,.5);
-    backdrop-filter: blur(40px);
-    border-radius: 10px;
-    padding: 20px;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 27px;
-    color: #fff;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: $background-color-interface;
+    backdrop-filter: $backdrop-filter-interface;
+    border-radius: $border-radius-interface;
+    padding: $padding-interface;
 }
 
 .select {
@@ -89,25 +85,20 @@ $select-max-height: round($game-height - $message-height - $game-height * 0.05);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 4;
+    z-index: $z-index-interface;
     width: $select-width;
     max-height: $select-max-height;
 
     &__option {
-        background-color: rgba(0,0,0,.5);
-        backdrop-filter: blur(40px);
-        border-radius: 10px;
+        background-color: $background-color-interface;
+        backdrop-filter: $backdrop-filter-interface;
+        border-radius: $border-radius-interface;
         padding: 10px 20px;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 27px;
-        color: #fff;
-        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         cursor: pointer;
         margin-bottom: 10px;
 
         &:hover {
-            background-color: rgba(0,0,0,.8);
+            background-color: $background-color-interface-hover;
         }
     }
 }
