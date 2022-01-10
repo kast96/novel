@@ -8,6 +8,8 @@ $message-height: round($game-height * 0.14);
 $select-width: round($game-width * 0.5);
 $select-max-height: round($game-height - $message-height - $game-height * 0.05);
 
+$save-load-width: round($game-width * 0.25);
+
 $background-color-interface: rgba(0,0,0,.5);
 $background-color-interface-hover: rgba(0,0,0,.8);
 $backdrop-filter-interface: blur(40px);
@@ -18,6 +20,9 @@ $font-size-interface: 20px;
 $line-height-interface: 27px;
 $color-interface: #fff;
 $text-shadow-interface: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+$font-size-title: 32px;
+$font-size-subtitle: 24px;
 
 $z-index-background: 10;
 $z-index-objects: 20;

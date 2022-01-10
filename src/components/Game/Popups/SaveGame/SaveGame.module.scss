@@ -8,5 +8,93 @@
     bottom: 0;
     background-color: $background-color-interface;
     backdrop-filter: $backdrop-filter-interface;
+    padding: $padding-interface;
     z-index: $z-index-popup;
+
+    &__header {
+        text-align: center;
+    }
+
+    &__header {
+        margin-bottom: 40px;
+    }
+
+    &__close {
+        position: absolute;
+        top: $padding-interface;
+        right: $padding-interface;
+        width: 60px;
+        height: 60px;
+        background-color: $background-color-interface;
+        backdrop-filter: $backdrop-filter-interface;
+        border-radius: 50%;
+        padding: $padding-interface;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $background-color-interface-hover;
+        }
+    }
+
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    &__item {
+        width: $save-load-width;
+        text-align: center;
+        background-color: $background-color-interface;
+        backdrop-filter: $backdrop-filter-interface;
+        border-radius: $border-radius-interface;
+        padding: $padding-interface;
+        margin-bottom: 80px;
+        box-sizing: border-box;
+        cursor: pointer;
+        overflow: hidden;
+
+        &:hover {
+            background-color: $background-color-interface-hover;
+        }
+
+        &__number {
+            position: absolute;
+            bottom: -$save-load-width / 3.6;
+            right: -$save-load-width / 16;
+            font-size: $save-load-width / 1.5;
+            color: #fff;
+            opacity: 0.05;
+        }
+
+        &__name {
+            font-size: $font-size-subtitle;
+            margin-bottom: 40px;
+        }
+
+        &__progress {
+            font-size: $font-size-subtitle;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: #ffa1a1;
+
+            &:global(.yellow) {
+                color: #fff5a1;
+            }
+
+            &:global(.green) {
+                color: #a5ffa1;
+            }
+        }
+
+        &__date {
+            font-size: 14px;
+            font-weight: 400;
+            text-align: left;
+            opacity: 0.6;
+        }
+    }
 }
