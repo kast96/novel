@@ -1,8 +1,11 @@
 import classNames from 'classnames';
 import s from './Game.module.scss';
 import GameInterface from './GameInterface/GameInterface';
+import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
+import SaveGame from './Popups/SaveGame/SaveGame';
+import LoadGame from './Popups/LoadGame/LoadGame';
 
-const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}) => {
+const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup}) => {
     let path = '/scenaries/'+config.id+'/';
     let background = (resources.backgrounds && resources.backgrounds[current.background]) ? 'url("'+path+resources.backgrounds[current.background]+'")' : '';
     let personSpriteLeft = current.persons.left.spriteName || 'normal';
@@ -37,7 +40,9 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption}
                     {current.jumpSelect.map((option) => <div key={option.jumpTo} className={s.select__option} onClick={onClickOption.bind(this, option.jumpTo)}>{option.text}</div>)}
                 </div>
             }
-            <GameInterface />
+            <GameInterface onSetActivePopup={onSetActivePopup} />
+            {activePopup === POPUP_SAVE_GAME && <SaveGame onSetActivePopup={onSetActivePopup} />}
+            {activePopup === POPUP_LOAD_GAME && <LoadGame onSetActivePopup={onSetActivePopup} />}
         </div>
     );
 }

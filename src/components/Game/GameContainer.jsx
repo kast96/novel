@@ -11,6 +11,7 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
     let [step, setLocalStep] = useState(false);
     let [textPostion, setLocalTextPositin] = useState(0);
     let lazyText = (current.text) ? current.text.substring(0, textPostion) : '';
+    let [activePopup, setActivePopup] = useState(null);
 
     const onClickGame = () => {
         if (current.jumpSelect) return;
@@ -27,6 +28,10 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
             setStep(jumpLabels[value]);
             console.log(`jumpSelect: [${jumpLabels[value]}] ${value}`);
         }
+    }
+
+    const onSetActivePopup = (value) => {
+        setActivePopup(value);
     }
 
     useEffect(() => {
@@ -61,7 +66,7 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
         <div>
             {isLoading && <div>Loading...</div>}
             {!isLoading && error && <div>Error: {error}</div>}
-            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} lazyText={lazyText} onClickGame={onClickGame} onClickOption={onClickOption} />}
+            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} lazyText={lazyText} onClickGame={onClickGame} onClickOption={onClickOption} activePopup={activePopup} onSetActivePopup={onSetActivePopup} />}
         </div>
     );
 }
