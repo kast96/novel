@@ -1,15 +1,29 @@
 import SaveGame from "./SaveGame";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { setSaves, getSaves } from "../../../../redux/reducer-saves";
+import { useEffect } from "react";
 
-const SaveGameContainer = ({onSetActivePopup, current, arSaves}) => {
+const SaveGameContainer = ({onSetActivePopup, current, saves, storyLength, getSaves, setSaves}) => {
+    useEffect(() => {
+        getSaves();
+    }, [saves, getSaves]);
+
     const onClickSaveGame = (id) => {
-        if (!id) return;
-        localStorage.setItem(`save${id}`, JSON.stringify(current));
+        setSaves(id, current);
     }
-    console.log(arSaves);
 
     return (
-        <SaveGame onSetActivePopup={onSetActivePopup} onClickSaveGame={onClickSaveGame} />
+        <SaveGame onSetActivePopup={onSetActivePopup} onClickSaveGame={onClickSaveGame} saves={saves} storyLength={storyLength} />
     );
 }
 
-export default SaveGameContainer;
+const mapStateToProps = (state) => {
+    return {
+        saves: state.saves.saves,
+    }
+}
+
+export default compose(
+    connect(mapStateToProps, {setSaves, getSaves}),
+)(SaveGameContainer);

@@ -5,7 +5,7 @@ import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
 import SaveGameContainer from './Popups/SaveGame/SaveGameContainer';
 import LoadGame from './Popups/LoadGame/LoadGame';
 
-const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, arSaves}) => {
+const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, storyLength}) => {
     let path = '/scenaries/'+config.id+'/';
     let background = (resources.backgrounds && resources.backgrounds[current.background]) ? 'url("'+path+resources.backgrounds[current.background]+'")' : '';
     let personSpriteLeft = current.persons.left.spriteName || 'normal';
@@ -41,7 +41,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
                 </div>
             }
             <GameInterface onSetActivePopup={onSetActivePopup} />
-            {activePopup === POPUP_SAVE_GAME && <SaveGameContainer onSetActivePopup={onSetActivePopup} current={current} arSaves={arSaves} />}
+            {activePopup === POPUP_SAVE_GAME && <SaveGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} />}
             {activePopup === POPUP_LOAD_GAME && <LoadGame onSetActivePopup={onSetActivePopup} />}
         </div>
     );

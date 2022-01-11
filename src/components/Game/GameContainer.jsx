@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import Game from "./Game";
 import { getStory, setStep, updateCurrent } from "../../redux/reducer-story";
 import { useState } from 'react';
-import { SAVES_COUNT } from "../../utils/constants";
 
 const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, current, getStory, setStep, updateCurrent}) => {
     let params = useParams();
@@ -13,7 +12,6 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
     let [textPostion, setLocalTextPositin] = useState(0);
     let lazyText = (current.text) ? current.text.substring(0, textPostion) : '';
     let [activePopup, setActivePopup] = useState(null);
-    let [arSaves, setSaves] = useState([]);
 
     const onClickGame = () => {
         if (current.jumpSelect) return;
@@ -63,20 +61,12 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
             setLocalTextPositin(nextValue);
         }, 50);
     }, [textPostion, current.text, isLoading]);
-    
-    useEffect(() => {
-        let arTmpSaves = [];
-        for (let i = 1; i <= SAVES_COUNT; i++) {
-            arTmpSaves.push(JSON.parse(localStorage.getItem(`save${i}`)));
-        }
-        setSaves(arTmpSaves);
-    }, [localStorage, setSaves]);
 
     return (
         <div>
             {isLoading && <div>Loading...</div>}
             {!isLoading && error && <div>Error: {error}</div>}
-            {!isLoading && !error && <Game config={config} resources={resources} story={story} current={current} lazyText={lazyText} onClickGame={onClickGame} onClickOption={onClickOption} activePopup={activePopup} onSetActivePopup={onSetActivePopup} arSaves={arSaves} />}
+            {!isLoading && !error && <Game config={config} resources={resources} storyLength={story.length} current={current} lazyText={lazyText} onClickGame={onClickGame} onClickOption={onClickOption} activePopup={activePopup} onSetActivePopup={onSetActivePopup} />}
         </div>
     );
 }

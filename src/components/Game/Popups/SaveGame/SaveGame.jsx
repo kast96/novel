@@ -1,12 +1,10 @@
 import s from './SaveGame.module.scss';
 import {ReactComponent as CloseSvg} from '../../../../resources/svg/times-solid.svg';
-import { SAVES_COUNT } from '../../../../utils/constants';
+import classNames from 'classnames';
 
-const SaveGame = ({onSetActivePopup, onClickSaveGame}) => {
-    let items = [];
-    for (let i = 1; i <= SAVES_COUNT; i++) {
-        items.push(i);
-    }
+const SaveGame = ({saves, storyLength, onSetActivePopup, onClickSaveGame}) => {
+    storyLength = storyLength || 0;
+
     return (
         <div className={s.popup}>
             <div className={s.popup__header}>
@@ -15,14 +13,21 @@ const SaveGame = ({onSetActivePopup, onClickSaveGame}) => {
             </div>
             <div className={s.popup__body}>
                 <div className={s.popup__items}>
-                    {items.map(item => (
-                    <div className={s.popup__item} key={item} onClick={onClickSaveGame.bind(this, item)}>
-                        <div className={s.popup__item__number}>{item}</div>
-                        <div className={s.popup__item__name}>Save {item}</div>
-                        <div className={s.popup__item__progress  + ' green'}>34%</div>
-                        <div className={s.popup__item__date}>10.01.2022</div>
-                    </div>
-                    ))}
+                    {saves.map((item, key) => {
+                        let index = key + 1;
+                        let step = item?.current?.step + 1 || 0;
+                        let progress = Math.round(step / storyLength * 100);
+                        let date = item?.date || '-';
+
+                        return (
+                            <div className={s.popup__item} key={key} onClick={onClickSaveGame.bind(this, index)}>
+                                <div className={s.popup__item__number}>{index}</div>
+                                <div className={s.popup__item__name}>Save {index}</div>
+                                <div className={classNames(s.popup__item__progress, {yellow: progress > 33, green: progress > 66})}>{`${progress}%`}</div>
+                                <div className={s.popup__item__date}>{date}</div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
