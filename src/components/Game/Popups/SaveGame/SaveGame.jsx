@@ -1,9 +1,10 @@
 import s from './SaveGame.module.scss';
 import {ReactComponent as CloseSvg} from '../../../../resources/svg/times-solid.svg';
+import { SAVES_COUNT } from '../../../../utils/constants';
 
-const SaveGame = ({onSetActivePopup}) => {
+const SaveGame = ({onSetActivePopup, onClickSaveGame}) => {
     let items = [];
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= SAVES_COUNT; i++) {
         items.push(i);
     }
     return (
@@ -15,7 +16,7 @@ const SaveGame = ({onSetActivePopup}) => {
             <div className={s.popup__body}>
                 <div className={s.popup__items}>
                     {items.map(item => (
-                    <div className={s.popup__item}>
+                    <div className={s.popup__item} key={item} onClick={onClickSaveGame.bind(this, item)}>
                         <div className={s.popup__item__number}>{item}</div>
                         <div className={s.popup__item__name}>Save {item}</div>
                         <div className={s.popup__item__progress  + ' green'}>34%</div>

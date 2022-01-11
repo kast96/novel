@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import s from './Game.module.scss';
 import GameInterface from './GameInterface/GameInterface';
 import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
-import SaveGame from './Popups/SaveGame/SaveGame';
+import SaveGameContainer from './Popups/SaveGame/SaveGameContainer';
 import LoadGame from './Popups/LoadGame/LoadGame';
 
-const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup}) => {
+const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, arSaves}) => {
     let path = '/scenaries/'+config.id+'/';
     let background = (resources.backgrounds && resources.backgrounds[current.background]) ? 'url("'+path+resources.backgrounds[current.background]+'")' : '';
     let personSpriteLeft = current.persons.left.spriteName || 'normal';
@@ -41,7 +41,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
                 </div>
             }
             <GameInterface onSetActivePopup={onSetActivePopup} />
-            {activePopup === POPUP_SAVE_GAME && <SaveGame onSetActivePopup={onSetActivePopup} />}
+            {activePopup === POPUP_SAVE_GAME && <SaveGameContainer onSetActivePopup={onSetActivePopup} current={current} arSaves={arSaves} />}
             {activePopup === POPUP_LOAD_GAME && <LoadGame onSetActivePopup={onSetActivePopup} />}
         </div>
     );
