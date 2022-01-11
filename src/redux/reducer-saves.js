@@ -28,13 +28,12 @@ const savesReducer = (state = initialState, action) => {
     }
 }
 
-export const setSaves = (id, current) => {
-    if (!id) return false;
+export const setSave = (id, current) => {
     let saveData = {
         date: new Date().toISOString().substring(0, 10),
         current
     };
-    
+
     localStorage.setItem(`save${id}`, JSON.stringify(saveData));
 	return getSaves();
 }

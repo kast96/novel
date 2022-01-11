@@ -2,8 +2,7 @@ import classNames from 'classnames';
 import s from './Game.module.scss';
 import GameInterface from './GameInterface/GameInterface';
 import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
-import SaveGameContainer from './Popups/SaveGame/SaveGameContainer';
-import LoadGame from './Popups/LoadGame/LoadGame';
+import SaveLoadGameContainer from './Popups/SaveLoadGame/SaveLoadGameContainer';
 
 const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, storyLength}) => {
     let path = '/scenaries/'+config.id+'/';
@@ -41,8 +40,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
                 </div>
             }
             <GameInterface onSetActivePopup={onSetActivePopup} />
-            {activePopup === POPUP_SAVE_GAME && <SaveGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} />}
-            {activePopup === POPUP_LOAD_GAME && <LoadGame onSetActivePopup={onSetActivePopup} />}
+            {(activePopup === POPUP_SAVE_GAME || activePopup === POPUP_LOAD_GAME) && <SaveLoadGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} activePopup={activePopup} />}
         </div>
     );
 }

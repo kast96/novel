@@ -1,14 +1,32 @@
-import s from './SaveGame.module.scss';
+import s from './SaveLoadGame.module.scss';
 import {ReactComponent as CloseSvg} from '../../../../resources/svg/times-solid.svg';
 import classNames from 'classnames';
+import { POPUP_SAVE_GAME, POPUP_LOAD_GAME } from '../../../../utils/constants';
 
-const SaveGame = ({saves, storyLength, onSetActivePopup, onClickSaveGame}) => {
+const SaveLoadGame = ({saves, storyLength, onSetActivePopup, onClickSaveGame, onClickLoadGame, activePopup}) => {
     storyLength = storyLength || 0;
+    let title = '';
+    let onClickEvent = () => {};
+
+    switch (activePopup) {
+        case POPUP_SAVE_GAME:
+            title = 'Save';
+            onClickEvent = onClickSaveGame;
+            break;
+
+        case POPUP_LOAD_GAME:
+            title = 'Load';
+            onClickEvent = onClickLoadGame;
+            break;
+    
+        default:
+            break;
+    }
 
     return (
         <div className={s.popup}>
             <div className={s.popup__header}>
-                <h1 className={s.popup__title}>Save</h1>
+                <h1 className={s.popup__title}>{title}</h1>
                 <div className={s.popup__close} onClick={onSetActivePopup.bind(this, null)}><CloseSvg /></div>
             </div>
             <div className={s.popup__body}>
@@ -20,7 +38,7 @@ const SaveGame = ({saves, storyLength, onSetActivePopup, onClickSaveGame}) => {
                         let date = item?.date || '-';
 
                         return (
-                            <div className={s.popup__item} key={key} onClick={onClickSaveGame.bind(this, index)}>
+                            <div className={s.popup__item} key={key} onClick={onClickEvent.bind(this, index)}>
                                 <div className={s.popup__item__number}>{index}</div>
                                 <div className={s.popup__item__name}>Save {index}</div>
                                 <div className={classNames(s.popup__item__progress, {yellow: progress > 33, green: progress > 66})}>{`${progress}%`}</div>
@@ -34,4 +52,4 @@ const SaveGame = ({saves, storyLength, onSetActivePopup, onClickSaveGame}) => {
     );
 }
 
-export default SaveGame;
+export default SaveLoadGame;

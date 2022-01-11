@@ -7,6 +7,7 @@ const TOGGLE_IS_LOADING = 'novel/story/TOGGLE-IS-LOADING';
 const SET_ERROR = 'novel/story/SET-ERROR';
 const SET_STEP = 'novel/story/SET-STEP';
 const UPDATE_CURRENT = 'novel/story/UPDATE-CURRENT';
+const SET_CURRENT = 'novel/story/SET-CURRENT';
 
 const initialState = {
     isLoading: true,
@@ -129,6 +130,11 @@ const storyReducer = (state = initialState, action) => {
             }
         }
 
+        case SET_CURRENT: {
+            console.log(action.current);
+            return state;
+        }
+
         default:
             return state;
     }
@@ -194,6 +200,10 @@ export const setStep = (step) => {
 
 export const updateCurrent = () => {
     return {type: UPDATE_CURRENT}
+}
+
+export const setCurrent = (current) => {
+    return {type: SET_CURRENT, current}
 }
 
 export default storyReducer;
