@@ -19,6 +19,7 @@ const SaveLoadGameContainer = ({onSetActivePopup, current, saves, storyLength, g
         let save = JSON.parse(localStorage.getItem(getSaveCode(config.id, id)));
         if (!save) return;
         setCurrent(save.current);
+        onSetActivePopup(null);
     }
 
     return (
