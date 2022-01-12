@@ -1,4 +1,5 @@
 import { SAVES_COUNT } from "../utils/constants";
+import { getSaveCode } from "../utils/variables-helper";
 
 const GET_SAVES = 'novel/saves/GET-SAVES';
 
@@ -11,7 +12,7 @@ const savesReducer = (state = initialState, action) => {
         case GET_SAVES:
             let saves = [];
             for (let i = 1; i <= SAVES_COUNT; i++) {
-                saves.push(JSON.parse(localStorage.getItem(`save${i}`)));
+                saves.push(JSON.parse(localStorage.getItem(getSaveCode(action.storyCode, i))));
             }
 
             if (JSON.stringify(saves) === JSON.stringify(state.saves)) {
@@ -28,18 +29,18 @@ const savesReducer = (state = initialState, action) => {
     }
 }
 
-export const setSave = (id, current) => {
+export const setSave = (storyCode, id, current) => {
     let saveData = {
         date: new Date().toISOString().substring(0, 10),
         current
     };
 
-    localStorage.setItem(`save${id}`, JSON.stringify(saveData));
-	return getSaves();
+    localStorage.setItem(getSaveCode(storyCode, id), JSON.stringify(saveData));
+	return getSaves(storyCode);
 }
 
-export const getSaves = () => {
-	return {type: GET_SAVES}
+export const getSaves = (storyCode) => {
+	return {type: GET_SAVES, storyCode}
 }
 
 export default savesReducer;

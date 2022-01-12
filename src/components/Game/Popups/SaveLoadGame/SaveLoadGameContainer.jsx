@@ -4,18 +4,19 @@ import { compose } from "redux";
 import { setSave, getSaves } from "../../../../redux/reducer-saves";
 import { useEffect } from "react";
 import { setCurrent } from "../../../../redux/reducer-story";
+import { getSaveCode } from "../../../../utils/variables-helper";
 
-const SaveLoadGameContainer = ({onSetActivePopup, current, saves, storyLength, getSaves, setSave, activePopup, setCurrent}) => {
+const SaveLoadGameContainer = ({onSetActivePopup, current, saves, storyLength, getSaves, setSave, activePopup, setCurrent, config}) => {
     useEffect(() => {
-        getSaves();
-    }, [saves, getSaves]);
+        getSaves(config.id);
+    }, [saves, getSaves, config.id]);
 
     const onClickSaveGame = (id) => {
-        setSave(id, current);
+        setSave(config.id, id, current);
     }
 
     const onClickLoadGame = (id) => {
-        let save = JSON.parse(localStorage.getItem(`save${id}`));
+        let save = JSON.parse(localStorage.getItem(getSaveCode(config.id, id)));
         if (!save) return;
         setCurrent(save.current);
     }

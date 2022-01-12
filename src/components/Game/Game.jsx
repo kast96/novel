@@ -40,7 +40,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
                 </div>
             }
             <GameInterface onSetActivePopup={onSetActivePopup} />
-            {(activePopup === POPUP_SAVE_GAME || activePopup === POPUP_LOAD_GAME) && <SaveLoadGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} activePopup={activePopup} />}
+            {(activePopup === POPUP_SAVE_GAME || activePopup === POPUP_LOAD_GAME) && <SaveLoadGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} activePopup={activePopup} config={config} />}
         </div>
     );
 }
