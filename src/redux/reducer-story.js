@@ -91,7 +91,7 @@ const storyReducer = (state = initialState, action) => {
                 }
             }
 
-        case UPDATE_CURRENT: {
+        case UPDATE_CURRENT:
             let current = {
                 ...state.current,
                 persons: {
@@ -128,11 +128,12 @@ const storyReducer = (state = initialState, action) => {
                 ...state,
                 current
             }
-        }
 
         case SET_CURRENT: {
-            console.log(action.current);
-            return state;
+            return {
+                ...state,
+                current: action.current
+            }
         }
 
         default:

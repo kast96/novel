@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { setSave, getSaves } from "../../../../redux/reducer-saves";
 import { useEffect } from "react";
+import { setCurrent } from "../../../../redux/reducer-story";
 
-const SaveLoadGameContainer = ({onSetActivePopup, current, saves, storyLength, getSaves, setSave, activePopup}) => {
+const SaveLoadGameContainer = ({onSetActivePopup, current, saves, storyLength, getSaves, setSave, activePopup, setCurrent}) => {
     useEffect(() => {
         getSaves();
     }, [saves, getSaves]);
@@ -14,8 +15,9 @@ const SaveLoadGameContainer = ({onSetActivePopup, current, saves, storyLength, g
     }
 
     const onClickLoadGame = (id) => {
-        console.log(JSON.parse(localStorage.getItem(`save${id}`)));
-        //updateCurrent(JSON.parse(localStorage.getItem(`save${id}`)));
+        let save = JSON.parse(localStorage.getItem(`save${id}`));
+        if (!save) return;
+        setCurrent(save.current);
     }
 
     return (
@@ -30,5 +32,5 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {setSave, getSaves}),
+    connect(mapStateToProps, {setSave, getSaves, setCurrent}),
 )(SaveLoadGameContainer);
