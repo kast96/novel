@@ -139,7 +139,6 @@ const storyReducer = (state = initialState, action) => {
             }
 
         case CLEAR_CURRENT: {
-            debugger;
             return initialState;
         }
 
