@@ -8,6 +8,7 @@ const SET_ERROR = 'novel/story/SET-ERROR';
 const SET_STEP = 'novel/story/SET-STEP';
 const UPDATE_CURRENT = 'novel/story/UPDATE-CURRENT';
 const SET_CURRENT = 'novel/story/SET-CURRENT';
+const CLEAR_CURRENT = 'novel/story/CLEAR-CURRENT';
 
 const initialState = {
     isLoading: true,
@@ -137,6 +138,11 @@ const storyReducer = (state = initialState, action) => {
                 current
             }
 
+        case CLEAR_CURRENT: {
+            debugger;
+            return initialState;
+        }
+
         case SET_CURRENT: {
             return {
                 ...state,
@@ -213,6 +219,10 @@ export const updateCurrent = () => {
 
 export const setCurrent = (current) => {
     return {type: SET_CURRENT, current}
+}
+
+export const clearCurrent = () => {
+    return {type: CLEAR_CURRENT}
 }
 
 export default storyReducer;

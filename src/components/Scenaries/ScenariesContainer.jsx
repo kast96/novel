@@ -2,11 +2,16 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Scenaries from "./Scenaries";
 import { getScenaries } from '../../redux/reducer-scenaries';
+import { clearCurrent } from "../../redux/reducer-story";
 
-const ScenariesContainer = React.memo(({scenaries, isLoading, getScenaries}) => {
+const ScenariesContainer = React.memo(({scenaries, isLoading, getScenaries, clearCurrent}) => {
   useEffect(() => {
     getScenaries();
   }, [getScenaries]);
+
+  useEffect(() => {
+    clearCurrent();
+  }, [clearCurrent]);
 
   return (
     <div>
@@ -24,4 +29,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getScenaries})(ScenariesContainer);
+export default connect(mapStateToProps, {getScenaries, clearCurrent})(ScenariesContainer);
