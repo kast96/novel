@@ -6,12 +6,13 @@ import {ReactComponent as AngleLeftSvg} from '../../../resources/svg/angle-left-
 import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../../utils/constants';
 import classNames from 'classnames';
 import Button from './Button/Button';
+import ButtonLink from './Button/ButtonLink';
 
 const GameInterface = ({onSetActivePopup}) => {
     return (
         <>
             <div className={classNames(s.interface, s.interface__left)}>
-                <Button icon={<AngleLeftSvg />} clickHandler={onSetActivePopup.bind(this, POPUP_SAVE_GAME)}>Back</Button>
+                <ButtonLink icon={<AngleLeftSvg />} to={'/'}>Back</ButtonLink>
             </div>
             <div className={classNames(s.interface, s.interface__right)}>
                 <Button icon={<PlusSvg />} clickHandler={onSetActivePopup.bind(this, POPUP_SAVE_GAME)}>New Game</Button>

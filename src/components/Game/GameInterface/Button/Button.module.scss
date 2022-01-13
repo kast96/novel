@@ -1,6 +1,7 @@
 @import '../../../../resources/scss/vars.scss';
 
 .btn {
+    display: block;
     width: $button-height-interface;
     height: $button-height-interface;
     background-color: $background-color-interface;
@@ -8,6 +9,7 @@
     border-radius: 50%;
     padding: $padding-interface;
     margin-bottom: 40px;
+    color: $color-interface;
     box-sizing: border-box;
     cursor: pointer;
 
