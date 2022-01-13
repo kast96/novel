@@ -3,12 +3,22 @@
 .interface {
     position: absolute;
     top: 20px;
-    right: 20px;
     z-index: $z-index-interface;
 
+    &__left {
+        left: 20px;
+    }
+
+    &__right {
+        right: 20px;
+    }
+
     &__btn {
-        width: 60px;
-        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $button-height-interface;
+        height: $button-height-interface;
         background-color: $background-color-interface;
         backdrop-filter: $backdrop-filter-interface;
         border-radius: 50%;
@@ -19,6 +29,11 @@
 
         &:hover {
             background-color: $background-color-interface-hover;
+        }
+
+        & :global(svg) {
+            max-width: 100%;
+            max-height: 100%;
         }
     }
 }
