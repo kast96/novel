@@ -8,14 +8,14 @@ import classNames from 'classnames';
 import Button from './Button/Button';
 import ButtonLink from './Button/ButtonLink';
 
-const GameInterface = ({onSetActivePopup}) => {
+const GameInterface = ({onSetActivePopup, onClickNewGame}) => {
     return (
         <>
             <div className={classNames(s.interface, s.interface__left)}>
                 <ButtonLink icon={<AngleLeftSvg />} to={'/'}>Back</ButtonLink>
             </div>
             <div className={classNames(s.interface, s.interface__right)}>
-                <Button icon={<PlusSvg />} clickHandler={onSetActivePopup.bind(this, POPUP_SAVE_GAME)}>New Game</Button>
+                <Button icon={<PlusSvg />} clickHandler={onClickNewGame}>New Game</Button>
                 <Button icon={<DownloadSvg />} clickHandler={onSetActivePopup.bind(this, POPUP_SAVE_GAME)}>Save Game</Button>
                 <Button icon={<UploadSvg />} clickHandler={onSetActivePopup.bind(this, POPUP_LOAD_GAME)}>Load Game</Button>
             </div>

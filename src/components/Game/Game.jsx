@@ -4,7 +4,7 @@ import GameInterface from './GameInterface/GameInterface';
 import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
 import SaveLoadGameContainer from './Popups/SaveLoadGame/SaveLoadGameContainer';
 
-const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, storyLength}) => {
+const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, storyLength, onClickNewGame}) => {
     let path = '/scenaries/'+config.id+'/';
     let background = (resources.backgrounds && resources.backgrounds[current.background]) ? 'url("'+path+resources.backgrounds[current.background]+'")' : '';
     let personSpriteLeft = current.persons.left.spriteName || 'normal';
@@ -39,7 +39,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
                     {current.jumpSelect.map((option) => <div key={option.jumpTo} className={s.select__option} onClick={onClickOption.bind(this, option.jumpTo)}>{option.text}</div>)}
                 </div>
             }
-            <GameInterface onSetActivePopup={onSetActivePopup} />
+            <GameInterface onSetActivePopup={onSetActivePopup} onClickNewGame={onClickNewGame} />
             {(activePopup === POPUP_SAVE_GAME || activePopup === POPUP_LOAD_GAME) && <SaveLoadGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} activePopup={activePopup} config={config} />}
         </div>
     );

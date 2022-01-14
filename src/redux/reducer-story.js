@@ -139,7 +139,10 @@ const storyReducer = (state = initialState, action) => {
             }
 
         case CLEAR_CURRENT: {
-            return initialState;
+            return {
+                ...state,
+                current: initialState.current
+            }
         }
 
         case SET_CURRENT: {
