@@ -13,7 +13,8 @@
     {
         "jumpLabel": "two",
         "personCenterSprite": "blue",
-        "text": "qweqwe"
+        "text": "qweqwe",
+        "sound": "sound1"
     },
     {
         "speaker": "player",

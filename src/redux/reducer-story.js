@@ -45,8 +45,9 @@ const initialState = {
         speaker: false,
         text: false,
         jumpTo: false,
-        jumpSelect: false
-    }
+        jumpSelect: false,
+        sound: false
+    },
 };
 
 const storyReducer = (state = initialState, action) => {
@@ -131,6 +132,8 @@ const storyReducer = (state = initialState, action) => {
 
                 current.jumpTo = storyItem.jumpTo ? storyItem.jumpTo : false;
                 current.jumpSelect = storyItem.jumpSelect ? storyItem.jumpSelect : false;
+
+                if (storyItem.sound) current.sound = storyItem?.sound;
             }
 
             return {

@@ -15,5 +15,8 @@
                 "blue": "assets/persons/lena/blue.png"
             }
         }
+    },
+    "sounds": {
+        "sound1": "assets/sounds/sound1.mp3"
     }
 }
