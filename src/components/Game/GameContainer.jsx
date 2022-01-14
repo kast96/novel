@@ -36,6 +36,7 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
 
     const onClickNewGame = () => {
         clearCurrent();
+        updateCurrent();
     }
 
     useEffect(() => {
