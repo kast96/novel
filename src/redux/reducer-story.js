@@ -107,7 +107,7 @@ const storyReducer = (state = initialState, action) => {
 
             let storyItem = state.story[current.step];
             if (storyItem) {
-                if (storyItem.background) current.background = storyItem?.background;
+                if (storyItem.background) current.background = storyItem.background;
 
                 if (storyItem.personLeft) current.persons.left.person = storyItem.personLeft;
                 if (storyItem.personCenterLeft) current.persons.centerLeft.person = storyItem.personCenterLeft;
@@ -133,7 +133,7 @@ const storyReducer = (state = initialState, action) => {
                 current.jumpTo = storyItem.jumpTo ? storyItem.jumpTo : false;
                 current.jumpSelect = storyItem.jumpSelect ? storyItem.jumpSelect : false;
 
-                if (storyItem.sound) current.sound = storyItem?.sound;
+                if (storyItem.sound) current.sound = storyItem.sound;
             }
 
             return {

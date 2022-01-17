@@ -19,7 +19,7 @@ const useMultiAudio = urls => {
     }),
   )
 
-  const toggle = targetIndex => () => {
+  const toggle = (targetIndex) => {
     const newPlayers = [...players]
     const currentIndex = players.findIndex(p => p.playing === true)
     if (currentIndex !== -1 && currentIndex !== targetIndex) {
@@ -56,23 +56,31 @@ const useMultiAudio = urls => {
         })
       })
     }
-  }, [])
+  }, [sources, players])
 
   return [players, toggle]
 }
 
-const MultiSoundPlayer = ({ urls }) => {
+const MultiSoundPlayer = React.memo(({urls, soundIndex}) => {
+  let [sound, setSound] = useState(-1);
+  
   const [players, toggle] = useMultiAudio(urls);
-  console.log(urls);
+
+  useEffect(() => {
+    if (sound !== soundIndex) {
+      setSound(soundIndex);
+      toggle(soundIndex);
+    }
+  }, [sound, soundIndex, setSound, toggle])
 
   return (
     <div style={{position: 'absolute', zIndex: 1000, top: "200px"}}>
       {players.map((player, i) => (
-        <Player key={i} player={player} toggle={toggle(i)} />
+        <Player key={i} player={player} toggle={toggle.bind(this, i)} />
       ))}
     </div>
   )
-}
+});
 
 const Player = ({ player, toggle }) => (
   <div>

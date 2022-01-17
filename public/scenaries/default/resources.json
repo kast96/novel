@@ -17,6 +17,7 @@
         }
     },
     "sounds": {
-        "sound1": "assets/sounds/sound1.mp3"
+        "sound1": "assets/sounds/sound1.mp3",
+        "sound2": "assets/sounds/sound2.mp3"
     }
 }

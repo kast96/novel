@@ -18,7 +18,8 @@
     },
     {
         "speaker": "player",
-        "text": "say player"
+        "text": "say player",
+        "sound": "sound2"
     },
     {
         "jumpSelect": [

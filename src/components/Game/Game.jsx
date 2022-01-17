@@ -19,11 +19,13 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
     let personSpriteRight = current.persons.right.spriteName || 'normal';
     let personRight = (current.persons.right.person && resources.persons && resources.persons[current.persons.right.person]?.sprites[personSpriteRight]) ? path+resources.persons[current.persons.right.person].sprites[personSpriteRight] : false;
     let speaker = (current.speaker && resources.persons && ((current.speaker === 'player' && resources.player) || resources.persons[current.speaker]));
-    let sound = (current.sound && resources.sounds[current.sound]) ? path+resources.sounds[current.sound] : false;
+    let sounds = Object.keys(resources.sounds);
+    let soundIndex = (current.sound && sounds) ? sounds.indexOf(current.sound) : -1;
+    let urls = (sounds) ? sounds.map((code) => path+resources.sounds[code]) : false;
     
     return (
         <div className={s.game}>
-            {sound && <MultiSoundPlayer urls={[sound]} />}
+            {urls && <MultiSoundPlayer urls={urls} soundIndex={soundIndex} />}
             <div className={s.background} style={{backgroundImage: background}}></div>
             <div className={s.clickarea} onClick={onClickGame}></div>
             <div className={s.persons}>
