@@ -37,7 +37,12 @@ const useMultiAudio = urls => {
 
   useEffect(() => {
     sources.forEach((source, i) => {
-      players[i].playing ? source.audio.play() : source.audio.pause()
+      if (players[i].playing) {
+        source.audio.play()
+      } else {
+        source.audio.pause()
+        source.audio.currentTime = 0;
+      }
     })
   }, [sources, players])
 
@@ -71,7 +76,11 @@ const MultiSoundPlayer = React.memo(({urls, soundIndex}) => {
   useEffect(() => {
     if (sound !== soundIndex) {
       setSound(soundIndex);
-      play(soundIndex);
+      if (soundIndex === -1) {
+        stop();
+      } else {
+        play(soundIndex);
+      }
     }
   }, [sound, soundIndex, setSound, play, stop])
 

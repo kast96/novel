@@ -8,7 +8,8 @@
         "personCenterRight": "L",
         "personRight": "L",
         "speaker": "L",
-        "text": "Lorem ipso"
+        "text": "Lorem ipso",
+        "sound": null
     },
     {
         "jumpLabel": "two",
