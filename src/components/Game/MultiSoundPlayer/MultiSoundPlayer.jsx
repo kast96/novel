@@ -19,16 +19,18 @@ const useMultiAudio = urls => {
     }),
   )
 
-  const toggle = (targetIndex) => {
+  const play = (targetIndex) => {
+    stop();
+    const newPlayers = [...players]
+    newPlayers[targetIndex].playing = true
+    setPlayers(newPlayers)
+  }
+
+  const stop = () => {
     const newPlayers = [...players]
     const currentIndex = players.findIndex(p => p.playing === true)
-    if (currentIndex !== -1 && currentIndex !== targetIndex) {
+    if (currentIndex !== -1) {
       newPlayers[currentIndex].playing = false
-      newPlayers[targetIndex].playing = true
-    } else if (currentIndex !== -1) {
-      newPlayers[targetIndex].playing = false
-    } else {
-      newPlayers[targetIndex].playing = true
     }
     setPlayers(newPlayers)
   }
@@ -58,36 +60,26 @@ const useMultiAudio = urls => {
     }
   }, [sources, players])
 
-  return [players, toggle]
+  return [play, stop]
 }
 
 const MultiSoundPlayer = React.memo(({urls, soundIndex}) => {
   let [sound, setSound] = useState(-1);
   
-  const [players, toggle] = useMultiAudio(urls);
+  const [play, stop] = useMultiAudio(urls);
 
   useEffect(() => {
     if (sound !== soundIndex) {
       setSound(soundIndex);
-      toggle(soundIndex);
+      play(soundIndex);
     }
-  }, [sound, soundIndex, setSound, toggle])
+  }, [sound, soundIndex, setSound, play, stop])
 
   return (
-    <div style={{position: 'absolute', zIndex: 1000, top: "200px"}}>
-      {players.map((player, i) => (
-        <Player key={i} player={player} toggle={toggle.bind(this, i)} />
-      ))}
+    <div>
+      
     </div>
   )
 });
-
-const Player = ({ player, toggle }) => (
-  <div>
-    <p>Stream URL: {player.url}</p>
-    <button onClick={toggle}>{player.playing ? 'Pause' : 'Play'}</button>
-  </div>
-)
-
 
 export default MultiSoundPlayer
