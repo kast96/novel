@@ -4,6 +4,8 @@ import GameInterface from './GameInterface/GameInterface';
 import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
 import SaveLoadGameContainer from './Popups/SaveLoadGame/SaveLoadGameContainer';
 import MultiSoundPlayer from './MultiSoundPlayer/MultiSoundPlayer';
+import { useState } from 'react';
+import soundPlayer from '../../utils/soundPlayer';
 
 const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, storyLength, onClickNewGame}) => {
     let path = '/scenaries/'+config.id+'/';
@@ -22,6 +24,11 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
     let sounds = Object.keys(resources.sounds);
     let soundIndex = (current.sound && sounds) ? sounds.indexOf(current.sound) : -1;
     let urls = (sounds) ? sounds.map((code) => path+resources.sounds[code]) : false;
+
+    useState(() => {
+        soundPlayer.setSource(urls);
+        console.log(soundPlayer);
+    }, [urls]);
     
     return (
         <div className={s.game}>
