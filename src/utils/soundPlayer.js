@@ -2,19 +2,24 @@ class SoundPlayer {
 	constructor() {
 		//singleton pattern
 		if (typeof SoundPlayer.instance === 'object') {
-			return SoundPlayer.instance;
+			return SoundPlayer.instance
 		}
 
-		this.sources = [];
+		this.sources = []
 
-		SoundPlayer.instance = this;
-		return this;
+		SoundPlayer.instance = this
+		return this
 	}
 
 	setSource(urls) {
+		this.stop()
 		this.sources = urls.map(url => {
 			return {url, audio: new Audio(url)}
 		})
+	}
+
+	getSource() {
+		return this.sources
 	}
 
 	stop() {
@@ -25,13 +30,13 @@ class SoundPlayer {
 	}
 
 	play(index) {
-		this.stop();
-		this.sources[index].audio.play();
+		this.stop()
+		this.sources[index].audio.play()
 	}
 }
 
-const soundPlayer = new SoundPlayer();
+const soundPlayer = new SoundPlayer()
 
-window.soundPlayer = soundPlayer;
+window.soundPlayer = soundPlayer
 
-export default soundPlayer;
+export default soundPlayer

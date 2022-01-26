@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Scenaries from "./Scenaries";
 import { getScenaries } from '../../redux/reducer-scenaries';
 import { clearCurrent } from "../../redux/reducer-story";
+import soundPlayer from '../../utils/soundPlayer';
 
 const ScenariesContainer = React.memo(({scenaries, isLoading, getScenaries, clearCurrent}) => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const ScenariesContainer = React.memo(({scenaries, isLoading, getScenaries, clea
 
   useEffect(() => {
     clearCurrent();
+    soundPlayer.stop();
   }, [clearCurrent]);
 
   return (

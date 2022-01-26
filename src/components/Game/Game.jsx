@@ -3,8 +3,7 @@ import s from './Game.module.scss';
 import GameInterface from './GameInterface/GameInterface';
 import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
 import SaveLoadGameContainer from './Popups/SaveLoadGame/SaveLoadGameContainer';
-import MultiSoundPlayer from './MultiSoundPlayer/MultiSoundPlayer';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import soundPlayer from '../../utils/soundPlayer';
 
 const Game = ({config, resources, current, lazyText, onClickGame, onClickOption, activePopup, onSetActivePopup, storyLength, onClickNewGame}) => {
@@ -23,16 +22,23 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
     let speaker = (current.speaker && resources.persons && ((current.speaker === 'player' && resources.player) || resources.persons[current.speaker]));
     let sounds = Object.keys(resources.sounds);
     let soundIndex = (current.sound && sounds) ? sounds.indexOf(current.sound) : -1;
-    let urls = (sounds) ? sounds.map((code) => path+resources.sounds[code]) : false;
 
-    useState(() => {
-        soundPlayer.setSource(urls);
-        console.log(soundPlayer);
-    }, [urls]);
+    useEffect(() => {
+        let _sounds = Object.keys(resources.sounds)
+        let urls = (_sounds) ? _sounds.map((code) => path+resources.sounds[code]) : false
+        soundPlayer.setSource(urls)
+    }, [path, resources.sounds])
+
+    useEffect(() => {
+        if (soundIndex === -1) {
+            soundPlayer.stop()
+        } else {
+            soundPlayer.play(soundIndex)
+        }
+    }, [soundIndex])
     
     return (
         <div className={s.game}>
-            {urls && <MultiSoundPlayer urls={urls} soundIndex={soundIndex} />}
             <div className={s.background} style={{backgroundImage: background}}></div>
             <div className={s.clickarea} onClick={onClickGame}></div>
             <div className={s.persons}>
