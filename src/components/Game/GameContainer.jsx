@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import Game from "./Game";
 import { clearCurrent, getStory, setStep, updateCurrent } from "../../redux/reducer-story";
 import { useState } from 'react';
+import soundPlayer from "../../utils/soundPlayer";
 
-const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, current, getStory, setStep, updateCurrent, clearCurrent}) => {
+const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, current, audioVolume, getStory, setStep, updateCurrent, clearCurrent}) => {
     let params = useParams();
     let [step, setLocalStep] = useState(false);
     let [textPostion, setLocalTextPositin] = useState(0);
@@ -67,6 +68,10 @@ const GameContainer = ({isLoading, error, config, resources, story, jumpLabels, 
         }, 50);
     }, [textPostion, current.text, isLoading]);
 
+    useEffect(() => {
+        soundPlayer.setVolume(audioVolume)
+    }, [audioVolume])
+
     return (
         <div>
             {isLoading && <div>Loading...</div>}
@@ -84,7 +89,8 @@ const mapStateToProps = (state) => {
         resources: state.story.resources,
         story: state.story.story,
         jumpLabels: state.story.jumpLabels,
-        current: state.story.current
+        current: state.story.current,
+        audioVolume: state.settings.audioVolume
     }
 }
 

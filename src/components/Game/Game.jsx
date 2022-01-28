@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import s from './Game.module.scss';
 import GameInterface from './GameInterface/GameInterface';
-import { POPUP_LOAD_GAME, POPUP_SAVE_GAME } from '../../utils/constants';
+import { POPUP_LOAD_GAME, POPUP_SAVE_GAME, POPUP_SETTINGS } from '../../utils/constants';
 import SaveLoadGameContainer from './Popups/SaveLoadGame/SaveLoadGameContainer';
+import SettingsContainer from './Popups/Settings/SettingsContainer';
 import { useEffect } from 'react';
 import soundPlayer from '../../utils/soundPlayer';
 
@@ -59,6 +60,7 @@ const Game = ({config, resources, current, lazyText, onClickGame, onClickOption,
             }
             <GameInterface onSetActivePopup={onSetActivePopup} onClickNewGame={onClickNewGame} />
             {(activePopup === POPUP_SAVE_GAME || activePopup === POPUP_LOAD_GAME) && <SaveLoadGameContainer onSetActivePopup={onSetActivePopup} current={current} storyLength={storyLength} activePopup={activePopup} config={config} />}
+            {(activePopup === POPUP_SETTINGS) && <SettingsContainer onSetActivePopup={onSetActivePopup} />}
         </div>
     );
 }

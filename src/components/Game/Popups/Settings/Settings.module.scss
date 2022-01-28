@@ -1,0 +1,57 @@
+@import '../../../../resources/scss/vars.scss';
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $background-color-interface;
+    backdrop-filter: $backdrop-filter-interface;
+    padding: $padding-interface;
+    z-index: $z-index-popup;
+
+    &__header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    &__close {
+        position: absolute;
+        top: $padding-interface;
+        right: $padding-interface;
+        width: 60px;
+        height: 60px;
+        background-color: $background-color-interface;
+        backdrop-filter: $backdrop-filter-interface;
+        border-radius: 50%;
+        padding: $padding-interface;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $background-color-interface-hover;
+        }
+    }
+    
+    &__setting {
+        &__title {
+
+        }
+    }
+}
+
+.audio_volume {
+    &__track {
+        height: 6px;
+        width: 100%;
+        background-color: #ccc;
+    }
+
+    &__thumb {
+        height: 42px;
+        width: 42px;
+        background-color: #999;
+    }
+}
