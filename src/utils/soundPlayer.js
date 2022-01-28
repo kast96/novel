@@ -6,6 +6,7 @@ class SoundPlayer {
 		}
 
 		this.sources = []
+		this.volume = 0.5
 
 		SoundPlayer.instance = this
 		return this
@@ -16,6 +17,7 @@ class SoundPlayer {
 		this.sources = urls.map(url => {
 			return {url, audio: new Audio(url)}
 		})
+		this.setVolume()
 	}
 
 	getSource() {
@@ -25,13 +27,25 @@ class SoundPlayer {
 	stop() {
 		this.sources.forEach((source) => {
 			source.audio.pause()
-      source.audio.currentTime = 0
+			source.audio.currentTime = 0
 		})
 	}
 
 	play(index) {
 		this.stop()
 		this.sources[index].audio.play()
+	}
+
+	setVolume(volume = this.volume) {
+		volume = parseFloat(volume)
+		if (volume < 0) volume = 0;
+		if (volume > 1) volume = 1;
+		
+		this.sources.forEach(source => {
+			source.audio.volume = volume;
+		});
+
+		this.volume = volume;
 	}
 }
 
