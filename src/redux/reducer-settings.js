@@ -1,7 +1,7 @@
 const SET_AUDIO_VOLUME = 'novel/settings/SET-AUDIO-VOLUME';
 
 const initialState = {
-	audioVolume: 0.5
+	audioVolume: 50
 };
 
 const settingsReducer = (state = initialState, action) => {
