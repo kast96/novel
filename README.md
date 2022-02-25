@@ -1,40 +1,179 @@
-# React Novel
+# React Novel &middot; ![node](https://img.shields.io/badge/node-v16.13.2-blue) ![react-native](https://img.shields.io/badge/react-17.0.2-blue)
 
-## Getting Started with Create React App
+Приложение-игра для создания и запуска новел.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект разрабатывается с помощью [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Story Params
+## Скриншоты
 
-### `background` (string)
+![gameplay](https://github.com/kast96/novel/blob/master/screenshots/gameplay.png?raw=true)
+![save](https://github.com/kast96/novel/blob/master/screenshots/save.png?raw=true)
 
-Background key in resources.json
+## Запуск
 
-### `personLeft`, `personCenterLeft`, `personCenter`, `personCenterRight`, `personRight` (string)
+Выполните загрузку зависимостей и команду `yarn start`
+```sh
+yarn install
+yarn start
+```
 
-Person key in resources.json with position
+## Особенности и возможности
 
-### `personSpriteLeft`, `personSpriteCenterLeft`, `personSpriteCenter`, `personSpriteCenterRight`, `personSpriteRight` (string)
+* Вывод до 5 персонажей на игровой экран
+* Смена спрайтов персонажей
+* Выбор персонажа-спикера
+* Воспроизведение музыкального сопровождения
+* Нелинейное перемещение по сценарию
+* Возможность выбора сценарных-ответов
+* Система сохранения/загрузки прогресса
+* Возможность создания нескольких сценариев
 
-Person sprite name in resources.json with position
 
-### `speaker` (string)
+## Структура и создание сценариев
 
-Speaker of text. Person key in resources.json or "player" value
+Сценарии хранятся в разделе `/public/scenaries/`.
+Каждый сценарий - отдельная папка.
+Также в данном разделе находится файл `scenaries.json`. В нем содержится список названий всех сценариев. Названия должны совпадать с названиями папок сценариев.
 
-### `text` (string)
+#### Содержимое раздела сценария
 
-Text by speaker
+Сценарий состоит из 3 файлов и папки с ресурсами:
+* `config.json` - файл конфигурации
+* `resources.json` - файл ресурсов
+* `story.json` - файл истории
+* `assets/` - радел с ресурсами, указываемыми в `resources.json`
 
-### `jumpLabel` (string)
+**config.json**
+```sh
+{
+    "name": "Основная история",
+    "version": "0.0.1"
+}
+```
+* `name` - Название сценария
+* `version` - Версия сценария
 
-Set Label for jump by commands jumpTo or jumpSelect.
-Warning! Item with jumpLabel should have all story params. Otherwise, during the jump, the parameter value before the jump may be saved
+**resources.json**
+```sh
+{
+    "player": {
+        "name": "Игрок",
+        "color": "#3F3"
+    },
+    "backgrounds": {
+        "bg1": "assets/backgrounds/bg.png"
+    },
+    "persons": {
+        "L": {
+            "name": "Len",
+            "color": "#FD8DFF",
+            "sprites": {
+                "normal": "assets/persons/lena/normal.png",
+                "blue": "assets/persons/lena/blue.png"
+            }
+        }
+    },
+    "sounds": {
+        "sound1": "assets/sounds/sound1.mp3",
+        "sound2": "assets/sounds/sound2.mp3"
+    }
+}
+```
+* `player` - Объект с информацией об главном герое
+    * `name` - имя главного героя
+    * `color` - цвет имени главного героя
 
-### `jumpTo` (string)
+* `backgrounds` - Объект с информацией о фоновых изображений (ключ-значение)
+    * `ключ` - уникальный символьный код фона - используется в файле истории
+    * `значение` - путь к изображению фона
 
-Jump to jumpLabel item by name
+* `persons` - Объект с информацией о персонажах
+    * `ключ` - уникальный символьный код персонажа - используется в файле истории
+    * `значение`:
+        * `name` - Имя персонажа
+        * `color` - Цвет имени персонажа
+        * `sprites` - Объект с информацией о спрайтах персонажа (ключ-значение)
+            * `ключ` - уникальный символьный код спрайта - используется в файле истории
+            * `значение` - путь к изображению спрайта
 
-### `jumpSelect` (array)
+* `sounds` - Объект с информацией о звуковом сопровождении (ключ-значение)
+    * `ключ` - уникальный символьный код музыкального произведения - используется в файле истории
+    * `значение` - путь к файлу музыкального произведения
 
-Show selector. Jump to jumpLabel item by name on click option of selector. Array type, contain objects with params `jumpTo` and `text`
+**story.json**
+```sh
+[
+    {
+        "jumpLabel": "start",
+        "background": "bg1",
+        "personLeft": "L",
+        "personCenterLeft": "L",
+        "personCenter": "L",
+        "personCenterRight": "L",
+        "personRight": "L",
+        "speaker": "L",
+        "text": "Lorem ipso",
+        "sound": null
+    },
+    {
+        "jumpLabel": "two",
+        "personCenterSprite": "blue",
+        "text": "qweqwe",
+        "sound": "sound1"
+    },
+    {
+        "speaker": "player",
+        "text": "say player",
+        "sound": "sound2"
+    },
+    {
+        "jumpSelect": [
+            {
+                "jumpTo": "start",
+                "text": "Jump to start"
+            },
+            {
+                "jumpTo": "two",
+                "text": "Jump to two"
+            }
+        ],
+        "text": "1111"
+    },
+    {
+        "jumpTo": "start"
+    }
+]
+```
+
+Содержит массив объектов-шагов сценария. Каждый шаг содержит набор определенных параметров, указанных ниже в документации. Параметр отвечает за определенное действие в игре, например, показ определенного фона, показ диалога или воспроизведение какого-либо музыкального произведения.
+
+## Доступные параметры сценария
+
+##### `background` (string)
+Символьный код фона из файла `resources.json`
+
+##### `personLeft`, `personCenterLeft`, `personCenter`, `personCenterRight`, `personRight` (string)
+Символьный код персонажа из файла `resources.json` с указанием позиционирования
+
+##### `personSpriteLeft`, `personSpriteCenterLeft`, `personSpriteCenter`, `personSpriteCenterRight`, `personSpriteRight` (string)
+Символьный код спрайта персонажа из файла `resources.json` с указанием позиционирования
+
+##### `speaker` (string)
+Символьный код персонажа из файла `resources.json`, который в данном шаге произносит диалог. Можно использовать значение `palyer` - диалог произносит главный герой.
+
+##### `text` (string)
+Сообщение, которе произносит персонаж-спикер
+
+##### `jumpLabel` (string)
+Символьное название метки для прыжка в данном шаге сценария. Можно будет использовать параметры `jumpTo` и `jumpSelect` для перехода к этому шагу.
+
+**Внимание!** Объект с данной меткой должен иметь весь набор доступных параметров т.к. после перехода на данный шаг, могут остаться другие параметры с предыдущего шага (Например может сохраниться фон или персонажи с прошлого шага).
+
+##### `jumpTo` (string)
+Выполняет переход к шагу сценария, в котором находится метка, указанная в значении параметра
+
+##### `jumpSelect` (array)
+Показывает список выбора действия, от которого зависит переход ка шагу сценария по символьному коду метки
+
+## Основные технологии
+React, React-Router-Dom, Redux, Axios
